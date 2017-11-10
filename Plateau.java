@@ -1,5 +1,4 @@
-package Game;
-
+package scrabble.game.jeu;
 /**
  * initialisation du plateau de scrabble
  * A : plateau (initialisé) de lettres
@@ -13,11 +12,11 @@ package Game;
 
 public class Plateau
 {
-	Lettre A[][] = new Lettre[15][15];
-	int B[][] = new int[15][15];
-	int i,j;
+	private Lettre plateau[][] = new Lettre[15][15];
+	private int plateau_cases_spe[][] = new int[15][15];
+	private int i,j;
 	//la Lettre vide sert pour l'initialisation du plateau de Lettres
-	Lettre vide = new Lettre();
+	private Lettre vide = new Lettre();
 
 	public Plateau() {initialisation(); CasesSpeciales();}
 	
@@ -27,7 +26,7 @@ public class Plateau
 		for (i=0 ; i<15 ; i++)
 			for (j=0 ; j<15 ; j++)
 			{
-				A[i][j] = vide;
+				plateau[i][j] = vide;
 			}
 	}
 
@@ -37,29 +36,29 @@ public class Plateau
 		for (i=0 ; i<15 ; i++)
 			for (j=0 ; j<15 ; j++)
 			{
-				B[i][j] = 0;
+				plateau_cases_spe[i][j] = 0;
 			}
 		
-			   B[0][0] = B[0][7] = B[0][14] = B[7][0] = 
-		   B[7][14] = B[14][0] = B[14][7] = B[14][14] = 4; //mot triple MT
+			   plateau_cases_spe[0][0] = plateau_cases_spe[0][7] = plateau_cases_spe[0][14] = plateau_cases_spe[7][0] = 
+		   plateau_cases_spe[7][14] = plateau_cases_spe[14][0] = plateau_cases_spe[14][7] = plateau_cases_spe[14][14] = 4; //mot triple MT
 		
-				B[1][1] = B[2][2] = B[3][3] = B[4][4] = 
-			B[1][13] = B[2][12] = B[3][11] = B[4][10] =
-			B[13][1] = B[12][2] = B[11][3] = B[10][4] = 
-		B[10][10] = B[11][11] = B[12][12] = B[13][13] = 3; //mot double MD
+				plateau_cases_spe[1][1] = plateau_cases_spe[2][2] = plateau_cases_spe[3][3] = plateau_cases_spe[4][4] = 
+			plateau_cases_spe[1][13] = plateau_cases_spe[2][12] = plateau_cases_spe[3][11] = plateau_cases_spe[4][10] =
+			plateau_cases_spe[13][1] = plateau_cases_spe[12][2] = plateau_cases_spe[11][3] = plateau_cases_spe[10][4] = 
+		plateau_cases_spe[10][10] = plateau_cases_spe[11][11] = plateau_cases_spe[12][12] = plateau_cases_spe[13][13] = 3; //mot double MD
 		
-			  B[1][5] = B[1][9] = B[13][5] = B[13][9] =
-			   B[5][1] = B[5][5] = B[5][9] = B[5][13] = 
-		       B[9][1] = B[9][5] = B[9][9] = B[9][13] = 2; //lettre triple LT
+			  plateau_cases_spe[1][5] = plateau_cases_spe[1][9] = plateau_cases_spe[13][5] = plateau_cases_spe[13][9] =
+			   plateau_cases_spe[5][1] = plateau_cases_spe[5][5] = plateau_cases_spe[5][9] = plateau_cases_spe[5][13] = 
+		       plateau_cases_spe[9][1] = plateau_cases_spe[9][5] = plateau_cases_spe[9][9] = plateau_cases_spe[9][13] = 2; //lettre triple LT
 		
-			   B[0][3] = B[0][11] = B[2][6] = B[2][8] = 
-			   B[3][0] = B[3][7] = B[3][14] = B[6][2] = 
-			   B[6][6] = B[6][8] = B[6][12] = B[7][3] = 
-			   B[7][11] = B[8][2] = B[8][6] = B[8][8] = 
-		   B[8][12] = B[11][0] = B[11][7] = B[11][14] = 
-		   B[12][6] = B[12][8] = B[14][3] = B[14][11] = 1; //lettre double LD
+			   plateau_cases_spe[0][3] = plateau_cases_spe[0][11] = plateau_cases_spe[2][6] = plateau_cases_spe[2][8] = 
+			   plateau_cases_spe[3][0] = plateau_cases_spe[3][7] = plateau_cases_spe[3][14] = plateau_cases_spe[6][2] = 
+			   plateau_cases_spe[6][6] = plateau_cases_spe[6][8] = plateau_cases_spe[6][12] = plateau_cases_spe[7][3] = 
+			   plateau_cases_spe[7][11] = plateau_cases_spe[8][2] = plateau_cases_spe[8][6] = plateau_cases_spe[8][8] = 
+		   plateau_cases_spe[8][12] = plateau_cases_spe[11][0] = plateau_cases_spe[11][7] = plateau_cases_spe[11][14] = 
+		   plateau_cases_spe[12][6] = plateau_cases_spe[12][8] = plateau_cases_spe[14][3] = plateau_cases_spe[14][11] = 1; //lettre double LD
 		
-			 								  B[7][7] = 3; //case centrale CC (MD)
+			 								  plateau_cases_spe[7][7] = 3; //case centrale CC (MD)
 	}
 	
 	public void afficher()
@@ -69,7 +68,7 @@ public class Plateau
 		{
 			for (j=0 ; j<15 ; j++)
 			{
-				System.out.print (A[i][j].getLettre() + " ");
+				System.out.print (plateau[i][j].getLettre() + " ");
 			}
 			System.out.println (" ");
 		}
@@ -80,9 +79,43 @@ public class Plateau
 		{
 			for (j=0 ; j<15 ; j++)
 			{
-				System.out.print (B[i][j] + " ");
+				System.out.print (plateau_cases_spe[i][j] + " ");
 			}
 			System.out.println (" ");
 		}	
 	}
+
+
+
+
+	
+	
+	/**
+	 * Getter and Setter
+	 */
+	
+	
+	
+	public Lettre[][] getPlateau() {
+		return plateau;
+	}
+	
+	
+	public void setPlateau(Lettre[][] plateau) {
+		this.plateau = plateau;
+	}
+	
+	
+	public int[][] getPlateau_cases_spe() {
+		return plateau_cases_spe;
+	}
+	
+	
+	public void setPlateau_cases_spe(int[][] plateau_cases_spe) {
+		this.plateau_cases_spe = plateau_cases_spe;
+	}
+	
+	
+	
+	
 }

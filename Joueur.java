@@ -44,4 +44,27 @@ public class Joueur {
 		return false;
 	}
 	
+
+	/**
+	 * Getter and Setter
+	 */
+
+	public Lettre[] getJeu() {
+		return jeu;
+	}
+
+	public void setJeu(Lettre[] jeu) {
+		this.jeu = jeu;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	
+	
 }
