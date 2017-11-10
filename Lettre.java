@@ -1,19 +1,18 @@
-/**
- * 
- */
 package scrabble.game.jeu;
 
+import java.io.Serializable;
 
 /**
- * @author simon strzelecki
+ * @author
  *
  */
-public class Lettre {
 
+public class Lettre implements Serializable
+{
 	/**
 	 * 
 	 */
-	
+	private static final long serialVersionUID = -4012544490248004650L;
 	private char lettre;
 	private int score;
 	
@@ -24,6 +23,7 @@ public class Lettre {
 	public Lettre(int asciiVal) {
 		initialisationLettre(asciiVal);
 	}
+	
 	public Lettre() {
 		lettre = '0';
 		score = 0;
@@ -33,10 +33,9 @@ public class Lettre {
 		
 		switch(asciiVal) {
 		
-		case 32:
+		/*case 32:
 			lettre = ' ';
-			score = 0;
-			break;
+			score = 0;*/
 		case 97:
 			lettre = 'a';
 			score = 1;
@@ -172,9 +171,4 @@ public class Lettre {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
-	
-	
-	
-
 }
