@@ -3,7 +3,7 @@ package scrabble.game.jeu;
 import java.io.Serializable;
 
 /**
- * @author
+ * @author simon strzelecki
  *
  */
 
