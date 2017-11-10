@@ -19,6 +19,10 @@ import java.io.Serializable;
  */
 public class Pioche implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6465219085131690909L;
 	private int[] pioche = new int[27];
 	private int nbLettre;
 	/**

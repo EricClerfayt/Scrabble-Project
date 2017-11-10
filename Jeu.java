@@ -3,7 +3,7 @@ package scrabble.game.jeu;
 
 public class Jeu {
 
-	//private Plateau plateau = new Plateau();
+	private Plateau plateau = new Plateau();
 	private Pioche pioche = new Pioche();
 	private Joueur joueur = new Joueur();
 	private Joueur ordi = new Joueur();
@@ -30,6 +30,11 @@ public class Jeu {
 				System.out.println("## ERREUR : ajoutLettre retourne false dans ajoutLettre Joueur ##");
 			}
 		}
+		
+		
+		
+		
+		
 		
 	}
 
@@ -66,5 +71,16 @@ public class Jeu {
 	public void setOrdi(Joueur ordi) {
 		this.ordi = ordi;
 	}
+
+
+	public Plateau getPlateau() {
+		return plateau;
+	}
+
+
+	public void setPlateau(Plateau plateau) {
+		this.plateau = plateau;
+	}
+	
 	
 }
