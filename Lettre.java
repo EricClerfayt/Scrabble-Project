@@ -24,11 +24,19 @@ public class Lettre {
 	public Lettre(int asciiVal) {
 		initialisationLettre(asciiVal);
 	}
+	public Lettre() {
+		lettre = '0';
+		score = 0;
+	}
 	
 	public void initialisationLettre(int asciiVal) {
 		
 		switch(asciiVal) {
 		
+		case 32:
+			lettre = ' ';
+			score = 0;
+			break;
 		case 97:
 			lettre = 'a';
 			score = 1;
