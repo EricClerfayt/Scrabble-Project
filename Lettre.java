@@ -33,9 +33,9 @@ public class Lettre implements Serializable
 		
 		switch(asciiVal) {
 		
-		/*case 32:
+		case 32:
 			lettre = ' ';
-			score = 0;*/
+			score = 0;
 		case 97:
 			lettre = 'a';
 			score = 1;
