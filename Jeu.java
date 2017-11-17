@@ -7,7 +7,7 @@ public class Jeu {
 	private Pioche pioche = new Pioche();
 	private Joueur joueur = new Joueur();
 	private Joueur ordi = new Joueur();
-	
+	private dico dictio = new dico();
 	
 	public Jeu() {
 	}
@@ -99,6 +99,16 @@ public class Jeu {
 
 	public void setPlateau(Plateau plateau) {
 		this.plateau = plateau;
+	}
+
+
+	public dico getDictio() {
+		return dictio;
+	}
+
+
+	public void setDictio(dico dictio) {
+		this.dictio = dictio;
 	}
 	
 	
