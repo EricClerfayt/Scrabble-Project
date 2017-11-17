@@ -57,6 +57,19 @@ public class Jeu {
 	}
 	
 	
+	/**
+	 * Verification du mot placé avec le Dictionnaire
+	 */
+	
+	public boolean verifierMot(Lettre [] mot)
+	{
+		String chaine = "";
+		for(int i = 0;i<mot.length;i++)
+		{
+			chaine = chaine + Character.toString(mot[i].getLettre());
+		}
+		return dictio.recherche(chaine);
+	}
 
 	/**
 	 * Getter and Setter
