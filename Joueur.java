@@ -2,6 +2,8 @@ package scrabble.game.jeu;
 
 public class Joueur {
 	
+	
+	// contient les lettres du joueur ('0' si case vide)
 	private Lettre[] jeu = new Lettre[7];
 	private int score ;
 	
@@ -49,10 +51,18 @@ public class Joueur {
 	 * Getter and Setter
 	 */
 
+	public Lettre getJeuIndice(int indice) {
+		return jeu[indice];
+	}
+	
 	public Lettre[] getJeu() {
 		return jeu;
 	}
 
+	public void setJeuIndice(int indice) {
+		Lettre l = new Lettre();
+		this.jeu[indice] = l;
+	}
 	public void setJeu(Lettre[] jeu) {
 		this.jeu = jeu;
 	}

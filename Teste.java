@@ -13,13 +13,15 @@ public class Teste {
 		
 		Jeu jeu = new Jeu();
 		
-		Plateau plateau = new Plateau();
+		jeu.getJoueur().afficherJeuJoueur();
+		System.out.println(" ");
 		jeu.toursEnCours();
 		jeu.getJoueur().afficherJeuJoueur();
-		jeu.getPioche().sauvgarde();
-		Panneau P = new Panneau(jeu);
-		Fenetre f = new Fenetre(P);
-		plateau.afficher();
+		
+		//Panneau P = new Panneau(jeu);
+		//Fenetre f = new Fenetre(P);
+		jeu.getPlateau().afficher();
+		//f.repaint();
 		
 	}
 
