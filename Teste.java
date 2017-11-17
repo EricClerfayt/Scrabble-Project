@@ -23,6 +23,7 @@ public class Teste {
 		jeu.getPlateau().afficher();
 		//f.repaint();
 		
+		
 	}
 
 }
