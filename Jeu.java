@@ -33,11 +33,30 @@ public class Jeu {
 		
 		
 		
-		
+		placerLettre(2, 4, 4);
 		
 		
 	}
 
+	
+	
+	
+	/**
+	 * placer une lettre sur le plateau
+	 */
+	
+	public boolean placerLettre(int indice , int x , int y) 
+	{
+		Lettre lettre = joueur.getJeuIndice(indice-1);
+		if( plateau.getPlateauIndice(x-1, y-1).getLettre() =='0') {
+			plateau.setPlateauIndice(x-1, y-1, lettre );
+			joueur.setJeuIndice(indice-1);
+			return true;
+		}
+		return false;
+	}
+	
+	
 
 	/**
 	 * Getter and Setter

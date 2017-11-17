@@ -1,11 +1,8 @@
 package scrabble.game.jeu;
-
 /**
  * initialisation du plateau de scrabble
- * plateau : plateau (initialisé) de lettres
- * plateau_cases_spe : plateau des cases spéciales
- * 
- * sauvegarde (serialisation) et lecture (deserialisation) du plateau
+ * A : plateau (initialisé) de lettres
+ * B : plateau des cases spéciales
  */
 
 /**
@@ -13,54 +10,13 @@ package scrabble.game.jeu;
  *
  */
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
-public class Plateau implements Serializable
+public class Plateau
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6199088246846017310L;
 	private Lettre plateau[][] = new Lettre[15][15];
 	private int plateau_cases_spe[][] = new int[15][15];
 	private int i,j;
 	//la Lettre vide sert pour l'initialisation du plateau de Lettres
 	private Lettre vide = new Lettre();
-	
-	public Plateau(Plateau plateau2) {
-		plateau = plateau2.plateau;
-		plateau_cases_spe = plateau2.plateau_cases_spe;
-	}
-	
-	/**
-	 * Getter and Setter
-	 */
-	
-	public Lettre[][] getPlateau() {
-		return plateau;
-	}
-
-
-	public void setPlateau(Lettre plateau[][]) {
-		this.plateau = plateau;
-	}
-
-
-	public int[][] getPlateau_cases_spe() {
-		return plateau_cases_spe;
-	}
-
-
-	public void setPlateau_lettres_spe(int plateau_cases_spe[][]) {
-		this.plateau_cases_spe = plateau_cases_spe;
-	}
 
 	public Plateau() {initialisation(); CasesSpeciales();}
 	
@@ -102,7 +58,7 @@ public class Plateau implements Serializable
 		   plateau_cases_spe[8][12] = plateau_cases_spe[11][0] = plateau_cases_spe[11][7] = plateau_cases_spe[11][14] = 
 		   plateau_cases_spe[12][6] = plateau_cases_spe[12][8] = plateau_cases_spe[14][3] = plateau_cases_spe[14][11] = 1; //lettre double LD
 		
-			 								                                                  plateau_cases_spe[7][7] = 3; //case centrale CC (MD)
+			 								  plateau_cases_spe[7][7] = 3; //case centrale CC (MD)
 	}
 	
 	public void afficher()
@@ -128,53 +84,43 @@ public class Plateau implements Serializable
 			System.out.println (" ");
 		}	
 	}
-	
+
+
+
+
 	
 	
 	/**
-	 * sauvegarde du plateau.
-	 */
-	
-	public void sauvegarde(){	
-		ObjectOutputStream oos;
-		try{
-			oos=new ObjectOutputStream(
-					new BufferedOutputStream(
-							new FileOutputStream(
-									new File("Plateau.txt"))));
-			oos.writeObject(this);
-			oos.close();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * chargement du plateau.
+	 * Getter and Setter
 	 */
 	
 	
-	public Plateau lecture(){
-		
-		ObjectInputStream ois;
-		Plateau p=null;
-		try{
-			ois = new ObjectInputStream(
-					new BufferedInputStream(
-							new FileInputStream(
-									new File("plateau.txt"))));
-			
-				System.out.println(((Plateau)ois.readObject()).toString());
-		 p = new Plateau(((Plateau)ois.readObject()));
-			
-			
-			ois.close();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return p;
+ 
+	public Lettre getPlateauIndice(int x, int y){
+		return plateau[x][y];
 	}
-
-
-
+	public Lettre[][] getPlateau() {
+		return plateau;
+	}
+	
+	public void setPlateauIndice(int x, int y,Lettre lettre) {
+		this.plateau[x][y] = lettre;
+	}
+	public void setPlateau(Lettre[][] plateau) {
+		this.plateau = plateau;
+	}
+	
+	
+	public int[][] getPlateau_cases_spe() {
+		return plateau_cases_spe;
+	}
+	
+	
+	public void setPlateau_cases_spe(int[][] plateau_cases_spe) {
+		this.plateau_cases_spe = plateau_cases_spe;
+	}
+	
+	
+	
+	
 }
