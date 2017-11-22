@@ -4,6 +4,7 @@
 package scrabble.game.jeu;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * @author simon strzelecki
@@ -21,129 +22,145 @@ public class Lettre implements Serializable{
 	
 	private char lettre;
 	private int score;
+	HashMap<Integer, Character> tableauLettre = new HashMap<>();
+	
+	
+	
+	
 	
 	/**
 	 * @param _lettre
 	 * @param _score
 	 */
-	public Lettre(int asciiVal) {
-		initialisationLettre(asciiVal);
+	public Lettre(int valeur) {
+		initialisationHashMap();
+		initialisationLettre(valeur);
 	}
 	public Lettre() {
+		initialisationHashMap();
 		lettre = '0';
 		score = 0;
 	}
 	
-	public void initialisationLettre(int asciiVal) {
+	public void initialisationHashMap() {
+		tableauLettre.put(1, 'A');
+		tableauLettre.put(1, 'B');
+		tableauLettre.put(1, 'C');
+		tableauLettre.put(1, 'D');
+		tableauLettre.put(1, 'E');
+		tableauLettre.put(1, 'F');
+		tableauLettre.put(1, 'G');
+		tableauLettre.put(1, 'H');
+		tableauLettre.put(1, 'I');
+		tableauLettre.put(1, 'J');
+		tableauLettre.put(1, 'K');
+		tableauLettre.put(1, 'L');
+		tableauLettre.put(1, 'M');
+		tableauLettre.put(1, 'N');
+		tableauLettre.put(1, 'O');
+		tableauLettre.put(1, 'P');
+		tableauLettre.put(1, 'Q');
+		tableauLettre.put(1, 'R');
+		tableauLettre.put(1, 'S');
+		tableauLettre.put(1, 'T');
+		tableauLettre.put(1, 'U');
+		tableauLettre.put(1, 'V');
+		tableauLettre.put(1, 'W');
+		tableauLettre.put(1, 'X');
+		tableauLettre.put(1, 'Y');
+		tableauLettre.put(1, 'Z');
+		tableauLettre.put(1, ' ');
 		
-		switch(asciiVal) {
+	}
+	
+	
+	
+	
+	public void initialisationLettre(int valeur) {
 		
-		case 32:
-			lettre = ' ';
+		lettre = tableauLettre.get(valeur);
+		
+		switch(valleur) {
+		
+		case 26:
 			score = 0;
 			break;
-		case 97:
-			lettre = 'a';
+		case 0:
 			score = 1;
 			break;
-		case 98:
-			lettre = 'b';
+		case 1:
 			score = 3;
 			break;
-		case 99:
-			lettre = 'c';
+		case 2:
 			score = 3;
 			break;
-		case 100:
-			lettre = 'd';
+		case 3:
 			score = 2;
 			break;
-		case 101:
-			lettre = 'e';
+		case 4:
 			score = 1;
 			break;
-		case 102:
-			lettre = 'f';
+		case 5:
 			score = 4;
 			break;
-		case 103:
-			lettre = 'g';
+		case 6:
 			score = 2;
 			break;
-		case 104:
-			lettre = 'h';
+		case 7:
 			score = 4;
 			break;
-		case 105:
-			lettre = 'i';
+		case 8:
 			score = 1;
 			break;
-		case 106:
-			lettre = 'j';
+		case 9:
 			score = 8;
 			break;
-		case 107:
-			lettre = 'k';
+		case 10:
 			score = 10;
 			break;
-		case 108:
-			lettre = 'l';
+		case 11:
 			score = 1;
 			break;
-		case 109:
-			lettre = 'm';
+		case 12:
 			score = 2;
 			break;
-		case 110:
-			lettre = 'n';
+		case 13:
 			score = 1;
 			break;
-		case 111:
-			lettre = 'o';
+		case 14:
 			score = 1;
 			break;
-		case 112:
-			lettre = 'p';
+		case 15:
 			score = 3;
 			break;
-		case 113:
-			lettre = 'q';
+		case 16:
 			score = 8;
 			break;
-		case 114:
-			lettre = 'r';
+		case 17:
 			score = 1;
 			break;
-		case 115:
-			lettre = 's';
+		case 18:
 			score = 1;
 			break;
-		case 116:
-			lettre = 't';
+		case 19:
 			score = 1;
 			break;
-		case 117:
-			lettre = 'u';
+		case 20:
 			score = 1;
 			break;
-		case 118:
-			lettre = 'v';
+		case 21:
 			score = 4;
 			break;
-		case 119:
-			lettre = 'w';
+		case 22:
 			score = 10;
 			break;
-		case 120:
-			lettre = 'x';
+		case 23:
 			score = 10;
 			break;
-		case 121:
-			lettre = 'y';
+		case 24:
 			score = 10;
 			break;
-		case 122:
-			lettre = 'z';
+		case 25:
 			score = 10;
 			break;
 		default:

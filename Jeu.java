@@ -1,5 +1,6 @@
 package scrabble.game.jeu;
 
+import java.util.Scanner;
 
 public class Jeu {
 
@@ -7,13 +8,15 @@ public class Jeu {
 	private Pioche pioche = new Pioche();
 	private Joueur joueur = new Joueur();
 	private Joueur ordi = new Joueur();
-	private dico dictio = new dico();
+	
 	
 	public Jeu() {
 	}
 
 	
 	public void toursEnCours () {
+		
+		Lettre[] mot = new Lettre[16];
 		
 		for(int i = 0 ; i < joueur.tailleJeu(); i++) {
 			
@@ -31,15 +34,76 @@ public class Jeu {
 			}
 		}
 		
+		mot = demanderJeu();
 		
+		System.out.println("" + mot[0]);
 		
-		placerLettre(2, 4, 4);
-		
+		//placerMot(mot, 5, 5, Direction.HAUT);
 		
 	}
+	
+	
+	/**
+	 * place le mot du joueur dans le tableau
+	 */
+	
+	public boolean placerMot(Lettre[] mot,int x,int y,Direction direction) {
+		
+		switch (direction)
+		{
+		case HAUT:
+			for(int i=0;i<mot.length;i++) {
+				System.out.println("" + mot[i]);
+				plateau.setPlateauIndice(x-1, y-1, mot[i] );
+				y++;
+			}
+			break;
+		case BAS:
+			for(int i=0;i<mot.length;i++) {
+				
+			}
+			break;
+		case DROITE:
+			for(int i=0;i<mot.length;i++) {
+				
+			}
+			break;
+		case GAUCHE:
+			for(int i=0;i<mot.length;i++) {
+				
+			}
+			break;
+		
+		} 
+		return false;
+	}
+	
+	
+	
+	
 
+	/**
+	 * Demande au joueur le mot qu'il veux jouer
+	 */
 	
-	
+	public Lettre[] demanderJeu() {
+		
+		Lettre[] mot = new Lettre[16];
+		
+		Scanner sc = new Scanner(System.in);
+		
+		String motDemander = sc.nextLine();
+
+		char[] motJouer = motDemander.toCharArray();
+		
+		for(int i=0; i < motJouer.length;i++ ) {
+			
+			mot[i] = new Lettre(motJouer[i]);
+			System.out.println((int)motJouer[i]);
+		}
+		System.out.println("" + mot[0]);
+		return mot;
+	}	
 	
 	/**
 	 * placer une lettre sur le plateau
@@ -57,19 +121,6 @@ public class Jeu {
 	}
 	
 	
-	/**
-	 * Verification du mot placé avec le Dictionnaire
-	 */
-	
-	public boolean verifierMot(Lettre [] mot)
-	{
-		String chaine = "";
-		for(int i = 0;i<mot.length;i++)
-		{
-			chaine = chaine + Character.toString(mot[i].getLettre());
-		}
-		return dictio.recherche(chaine);
-	}
 
 	/**
 	 * Getter and Setter
@@ -112,16 +163,6 @@ public class Jeu {
 
 	public void setPlateau(Plateau plateau) {
 		this.plateau = plateau;
-	}
-
-
-	public dico getDictio() {
-		return dictio;
-	}
-
-
-	public void setDictio(dico dictio) {
-		this.dictio = dictio;
 	}
 	
 	

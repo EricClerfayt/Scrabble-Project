@@ -46,6 +46,13 @@ public class Joueur {
 		return false;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * Getter and Setter
