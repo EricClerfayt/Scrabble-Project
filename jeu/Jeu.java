@@ -8,6 +8,7 @@ public class Jeu {
 	private Pioche pioche = new Pioche();
 	private Joueur joueur = new Joueur();
 	private Joueur ordi = new Joueur();
+	private dico dictio = new dico();
 	
 	
 	public Jeu() {
@@ -126,6 +127,19 @@ public class Jeu {
 		return false;
 	}
 	
+	/**
+	 * Verification du mot placé avec le Dictionnaire
+	 */
+	 	
+	 public boolean verifierMot(Lettre [] mot)
+	 {
+		String chaine = "";
+	 	for(int i = 0;i<mot.length;i++)
+	 	{
+	 		chaine = chaine + Character.toString(mot[i].getLettre());
+	 	}
+			return dictio.recherche(chaine);
+	 }
 	
 
 	/**
@@ -171,5 +185,12 @@ public class Jeu {
 		this.plateau = plateau;
 	}
 	
-	
+	public dico getDictio() {
+		return dictio;
+	}
+		 
+		 
+	public void setDictio(dico dictio) {
+		this.dictio = dictio;
+	}
 }

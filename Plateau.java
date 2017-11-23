@@ -7,11 +7,14 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * initialisation du plateau de scrabble
- * A : plateau (initialisé) de lettres
- * B : plateau des cases spéciales
+ * * plateau : plateau (initialisé) de lettres
+ * plateau_cases_spe : plateau des cases spéciales
+ * 
+ * sauvegarde (serialisation) et lecture (deserialisation) du plateau
  */
 
 /**
@@ -19,7 +22,7 @@ import java.io.ObjectOutputStream;
  *
  */
 
-public class Plateau
+public class Plateau implements Serializable
 {
 	private static final long serialVersionUID = -6199088246846017310L;
 	private Lettre plateau[][] = new Lettre[15][15];
