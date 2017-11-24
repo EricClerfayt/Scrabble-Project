@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
 
 
 
@@ -25,6 +26,7 @@ public class Pioche implements Serializable{
 	private static final long serialVersionUID = -6465219085131690909L;
 	private int[] pioche = new int[27];
 	private int nbLettre;
+	HashMap< Integer, Character> tableauLettre = new HashMap<>();
 	/**
 	 * 
 	 */
@@ -32,12 +34,14 @@ public class Pioche implements Serializable{
 	public Pioche() {
 		initialisationPioche();
 		nbLettre = 102;
+		initialisationHashMap();
 	}
 
 	
 	public Pioche(Pioche pioche2) {
 		nbLettre = pioche2.nbLettre;
 		pioche = pioche2.pioche;
+		initialisationHashMap();
 	}
 
 
@@ -74,12 +78,44 @@ public class Pioche implements Serializable{
 		pioche[26] = 2;
 	}
 
+	/**
+	 * initialise la hash map
+	 */
+	public void initialisationHashMap() {
+		tableauLettre.put(1,'A');
+		tableauLettre.put(2,'B');
+		tableauLettre.put(3,'C');
+		tableauLettre.put(4,'D');
+		tableauLettre.put(5,'E');
+		tableauLettre.put(6,'F');
+		tableauLettre.put(7,'G');
+		tableauLettre.put(8,'H');
+		tableauLettre.put(9,'I');
+		tableauLettre.put(10,'J');
+		tableauLettre.put(11,'K');
+		tableauLettre.put(12,'L');
+		tableauLettre.put(13,'M');
+		tableauLettre.put(14,'N');
+		tableauLettre.put(15,'O');
+		tableauLettre.put(16,'P');
+		tableauLettre.put(17,'Q');
+		tableauLettre.put(18,'R');
+		tableauLettre.put(19,'S');
+		tableauLettre.put(20,'T');
+		tableauLettre.put(21,'U');
+		tableauLettre.put(22,'V');
+		tableauLettre.put(23,'W');
+		tableauLettre.put(24,'X');
+		tableauLettre.put(25,'Y');
+		tableauLettre.put(26,'Z');
+		tableauLettre.put(27,' ');
+	}
 
 	/**
 	 * pioche une lettre aléatoirement dans la pioche.
-	 * @return la la valeur ASCII de la lettre ou -1 si erreur
+	 * @return la lettre ( 0 si erreur)
 	 */
-	public int donner() {
+	public Lettre donner() {
 		
 
 		
@@ -87,21 +123,22 @@ public class Pioche implements Serializable{
 		
 		if(nbLettre != 0){
 			do {
-				lettre =(int)(Math.random()*27);
+				lettre =(int)(Math.random()*27+1);
 				
-				if(pioche[lettre] != 0) {
+				if(pioche[lettre-1] != 0){
 					nbLettre --;
+					pioche[lettre-1] --;
 					if(lettre == 26) {
-						return 32;
+						return (new Lettre(' '));
 					}
 					else {
-						return (97+lettre);						
+						return (new Lettre(tableauLettre.get(lettre)));						
 					}
 				}
 			}while (true);
 		}
 		
-		return -1;
+		return (new Lettre());
 	}
 	
 	

@@ -11,6 +11,7 @@ public class Teste {
 
 	public static void main(String[] args) {
 		
+		
 		Jeu jeu = new Jeu();
 		
 		jeu.getJoueur().afficherJeuJoueur();
@@ -18,10 +19,10 @@ public class Teste {
 		jeu.toursEnCours();
 		jeu.getJoueur().afficherJeuJoueur();
 		
-		//Panneau P = new Panneau(jeu);
-		//Fenetre f = new Fenetre(P);
+		Panneau P = new Panneau(jeu);
+		Fenetre f = new Fenetre(P);
 		jeu.getPlateau().afficher();
-		//f.repaint();
+		f.repaint();
 		
 	}
 

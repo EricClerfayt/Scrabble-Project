@@ -46,6 +46,81 @@ public class Joueur {
 		return false;
 	}
 	
+	
+	/**
+	 * calculer le score d'un mot
+	 * @return le score du mot placé.
+	 */
+	
+	public int calculpoint(Lettre[] mot,int x,int y,Direction direction) {
+	
+		
+		 Lettre l = new Lettre();
+		 Plateau plateau = new Plateau();
+		 
+		 int multMot = 1;
+		 int score = 0;
+		 
+		 int i = 0;
+		 
+		 while(mot[i] != null || i == mot.length-1) {
+			 
+			 l.setLettre(mot[i].getLettre());
+			 l.setScore(mot[i].getScore());
+			 switch (direction)
+				{
+				case BAS:
+						 switch (plateau.getPlateau_cases_speIndice(x-1, y-1))
+						 {
+						 case 0:
+							 score += l.getScore();
+							 break;
+						 case 4:
+							 score += l.getScore();
+							 multMot += 3;
+							 break;
+						 case 3:
+							 score += l.getScore();
+							 multMot += 2;
+							 break;
+						 case 2:
+							 score += l.getScore()*3;
+							 break;
+						 case 1:
+							 score += l.getScore()*2;
+							 break;
+					}
+						 x++;
+					break;
+				case DROITE:
+						switch (plateau.getPlateau_cases_speIndice(x-1, y-1))
+						 {
+						 case 0:
+							 score += l.getScore();
+							 break;
+						 case 4:
+							 score += l.getScore();
+							 multMot += 3;
+							 break;
+						 case 3:
+							 score += l.getScore();
+							 multMot += 2;
+							 break;
+						 case 2:
+							 score += l.getScore()*3;
+							 break;
+						 case 1:
+							 score += l.getScore()*2;
+							 break;
+					}
+						y++;
+					break;
+				}
+			 i++;
+		 }
+			score = score* multMot;
+			return score;
+	}	
 
 	/**
 	 * Getter and Setter

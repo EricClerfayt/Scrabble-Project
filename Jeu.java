@@ -1,5 +1,6 @@
 package scrabble.game.jeu;
 
+import java.util.Scanner;
 
 public class Jeu {
 
@@ -7,6 +8,7 @@ public class Jeu {
 	private Pioche pioche = new Pioche();
 	private Joueur joueur = new Joueur();
 	private Joueur ordi = new Joueur();
+	private dico dictio = new dico();
 	
 	
 	public Jeu() {
@@ -15,31 +17,103 @@ public class Jeu {
 	
 	public void toursEnCours () {
 		
+		Lettre[] mot = new Lettre[16];
+		
 		for(int i = 0 ; i < joueur.tailleJeu(); i++) {
 			
-			char L = (char)pioche.donner();
+			Lettre L = pioche.donner();
 			
-			if(joueur.ajoutLettre(new Lettre(L)) == false) {
+			if(joueur.ajoutLettre(L) == false) {
 				System.out.println("## ERREUR : ajoutLettre retourne false dans ajoutLettre Joueur ##");
 			}
 		}
 		for(int i = 0 ; i < ordi.tailleJeu(); i++) {
-			char L = (char)pioche.donner();
+			Lettre L = pioche.donner();
 			
-			if(ordi.ajoutLettre(new Lettre(L)) == false) {
+			if(ordi.ajoutLettre(L) == false) {
 				System.out.println("## ERREUR : ajoutLettre retourne false dans ajoutLettre Joueur ##");
 			}
 		}
 		
+		mot = demanderJeu();
+		
+		if (verifierPlacementMot(mot, 1, 12, Direction.BAS))
+		{
+			placerMot(mot, 1, 12, Direction.BAS);
+		}
 		
 		
-		placerLettre(2, 4, 4);
 		
+	
 		
 	}
+	
+	
+	/**
+	 * place le mot du joueur dans le tableau
+	 */
+	
+	public boolean placerMot(Lettre[] mot,int x,int y,Direction direction) {
+		
+		int i=0;
+		
+		switch (direction)
+		{
+		
+		case BAS:
+			while(mot[i] != null || i == mot.length-1) {
+				plateau.setPlateauIndice(x-1, y-1, mot[i] );
+				x++;
+				i++;
+			}
+			break;
+		case DROITE:
+			while(mot[i] != null || i == mot.length-1){
+				plateau.setPlateauIndice(x-1, y-1, mot[i] );
+				y++;
+				i++;
+			}
+			break;
+		
+		} 
+		return false;
+	}
+	
+	
+	
+	
 
+	/**
+	 * Demande au joueur le mot qu'il veux jouer
+	 */
 	
-	
+	public Lettre[] demanderJeu() {
+		
+		Lettre[] mot = new Lettre[16];
+		char[] motJouer;
+		
+		Scanner sc = new Scanner(System.in);
+		
+		String motDemander = sc.nextLine();
+		if(motDemander.equals(motDemander.toUpperCase()))
+		{
+			motJouer = motDemander.toCharArray();
+		}
+		else
+		{
+			
+			motJouer = motDemander.toUpperCase().toCharArray();
+		}
+
+		
+		
+		for(int i=0; i < motJouer.length;i++ ) {
+			
+			
+			mot[i] = new Lettre(motJouer[i]);
+		}
+		return mot;
+	}	
 	
 	/**
 	 * placer une lettre sur le plateau
@@ -56,7 +130,61 @@ public class Jeu {
 		return false;
 	}
 	
+	/**
+	 * Verification du mot placé avec le Dictionnaire
+	 */
+	 	
+	 public boolean verifierMot(Lettre [] mot)
+	 {
+		String chaine = "";
+	 	for(int i = 0;i<mot.length;i++)
+	 	{
+	 		chaine = chaine + Character.toString(mot[i].getLettre());
+	 	}
+			return dictio.recherche(chaine);
+	 }
 	
+	 /*
+	  * Verification du placement du mot
+	  * si chevauchement et que la lettre du plateau ne correspond pas à la lettre du mot, return false
+	  * si le mot dépasse du plateau, return false
+	  * sinon return true
+	  */
+	 
+	 public boolean verifierPlacementMot(Lettre[] mot,int x,int y,Direction direction) {
+			
+			int i=0;
+			private boolean place;
+			
+			switch (direction)
+			{
+			
+			case BAS:
+				while(mot[i] != null || i == mot.length-1) 
+				{
+					 if (((plateau[x-1][y-1] == vide) || (plateau[x-1][y-1] == mot[i])) && (((x-1)<16 && (x-1)>= 0) && ((y-1)<16 && (y-1)>= 0)))
+					 {
+						 place = true;
+						 x++;
+						 i++;
+					 }
+					 else return false; break;
+				}
+				return place; break;
+			case DROITE:
+				while(mot[i] != null || i == mot.length-1) 
+				{
+					 if (((plateau[x-1][y-1] == vide) || (plateau[x-1][y-1] == mot[i])) && (((x-1)<16 && (x-1)>= 0) && ((y-1)<16 && (y-1)>= 0)))
+					{
+						place = true;
+						y++;
+						i++;
+					}
+					else return false; break;
+				}
+				return place; break;
+			} 
+	 }
 
 	/**
 	 * Getter and Setter
@@ -101,5 +229,12 @@ public class Jeu {
 		this.plateau = plateau;
 	}
 	
-	
+	public dico getDictio() {
+		return dictio;
+	}
+		 
+		 
+	public void setDictio(dico dictio) {
+		this.dictio = dictio;
+	}
 }
