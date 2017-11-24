@@ -54,11 +54,12 @@ public class Jeu {
 			break;
 
 		case 2:
+			System.out.println("Vous avez passez votre tour.");
 			break;
 
 		case 3:
 			sc.nextLine();
-			System.out.println("Combien de lettres voulait vous defausser?(de 1 à 7 lettres)");
+			System.out.println("Combien de lettres voulait vous defausser?(de 1 Ã  7 lettres)");
 			while(n>7 || n<=0)
 				n = sc.nextInt();
 			Lettre [] defausse = new Lettre[n];
@@ -170,7 +171,7 @@ public class Jeu {
 	}
 
 	/**
-	 * Verification du mot placé avec le Dictionnaire
+	 * Verification du mot placÃ© avec le Dictionnaire
 	 */
 
 	public boolean verifierMot(Lettre [] mot)
