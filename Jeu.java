@@ -162,28 +162,31 @@ public class Jeu {
 			case BAS:
 				while(mot[i] != null || i == mot.length-1) 
 				{
-					 if (((plateau[x-1][y-1] == vide) || (plateau[x-1][y-1] == mot[i])) && (((x-1)<16 && (x-1)>= 0) && ((y-1)<16 && (y-1)>= 0)))
+					 if (((plateau.getPlateau[x-1][y-1].getLettre() == plateau.getVide()) || (plateau.getPlateau[x-1][y-1].getLettre() == mot[i])) && (((x-1)<15 && (x-1)>= 0) && ((y-1)<15 && (y-1)>= 0)))
 					 {
 						 place = true;
 						 x++;
 						 i++;
 					 }
-					 else return false; break;
+					 else return false;
 				}
-				return place; break;
+				return place;
+				break;
 			case DROITE:
 				while(mot[i] != null || i == mot.length-1) 
 				{
-					 if (((plateau[x-1][y-1] == vide) || (plateau[x-1][y-1] == mot[i])) && (((x-1)<16 && (x-1)>= 0) && ((y-1)<16 && (y-1)>= 0)))
+					 if (((plateau.getPlateau[x-1][y-1].getLettre() == vide) || (plateau.getPlateau[x-1][y-1].getLettre() == mot[i])) && (((x-1)<15 && (x-1)>= 0) && ((y-1)<15 && (y-1)>= 0)))
 					{
 						place = true;
 						y++;
 						i++;
 					}
-					else return false; break;
+					else return false;
 				}
-				return place; break;
+				return place;
+				break;
 			} 
+			return false;
 	 }
 
 	/**

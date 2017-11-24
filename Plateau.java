@@ -183,7 +183,9 @@ public class Plateau implements Serializable
 		this.plateau_cases_spe = plateau_cases_spe;
 	}
 	
-	
+	public char getvide() {
+		return vide.getLettre();
+	}
 	
 	
 }
