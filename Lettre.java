@@ -4,6 +4,7 @@
 package scrabble.game.jeu;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * @author simon strzelecki
@@ -18,150 +19,181 @@ public class Lettre implements Serializable{
 	/**
 	 * 
 	 */
-	
+
 	private char lettre;
 	private int score;
-	
+	HashMap<Character, Integer> tableauLettre = new HashMap<>();
+
+
+
+
+
 	/**
+	 * constructeur qui prend en parramétre un char et initialise la lettre
 	 * @param _lettre
 	 * @param _score
 	 */
-	public Lettre(int asciiVal) {
-		initialisationLettre(asciiVal);
+	public Lettre(char c) {
+		initialisationHashMap();
+		initialisationLettre(c);
 	}
+	/**
+	 * constructeur par defaut
+	 */
 	public Lettre() {
+		initialisationHashMap();
 		lettre = '0';
 		score = 0;
 	}
-	
-	public void initialisationLettre(int asciiVal) {
-		
-		switch(asciiVal) {
-		
-		case 32:
-			lettre = ' ';
+
+	/**
+	 * initialise la hash map
+	 */
+	public void initialisationHashMap() {
+		tableauLettre.put('A',1);
+		tableauLettre.put('B',2);
+		tableauLettre.put('C',3);
+		tableauLettre.put('D',4);
+		tableauLettre.put('E',5);
+		tableauLettre.put('F',6);
+		tableauLettre.put('G',7);
+		tableauLettre.put('H',8);
+		tableauLettre.put('I',9);
+		tableauLettre.put('J',10);
+		tableauLettre.put('K',11);
+		tableauLettre.put('L',12);
+		tableauLettre.put('M',13);
+		tableauLettre.put('N',14);
+		tableauLettre.put('O',15);
+		tableauLettre.put('P',16);
+		tableauLettre.put('Q',17);
+		tableauLettre.put('R',18);
+		tableauLettre.put('S',19);
+		tableauLettre.put('T',20);
+		tableauLettre.put('U',21);
+		tableauLettre.put('V',22);
+		tableauLettre.put('W',23);
+		tableauLettre.put('X',24);
+		tableauLettre.put('Y',25);
+		tableauLettre.put('Z',26);
+		tableauLettre.put(' ',27);
+	}
+
+
+
+	/**
+	 * Prend en parramettre un char pour le retrouver dans le tableau des lettres affin d'initialiser le score.
+	 * @param c (char)
+	 */
+	public void initialisationLettre(char c) {
+
+
+		int valeur = tableauLettre.get(c);
+		lettre=c;
+
+		switch(valeur-1) {
+
+		case 26:
 			score = 0;
 			break;
-		case 97:
-			lettre = 'a';
+		case 0:
 			score = 1;
 			break;
-		case 98:
-			lettre = 'b';
+		case 1:
 			score = 3;
 			break;
-		case 99:
-			lettre = 'c';
+		case 2:
 			score = 3;
 			break;
-		case 100:
-			lettre = 'd';
+		case 3:
 			score = 2;
 			break;
-		case 101:
-			lettre = 'e';
+		case 4:
 			score = 1;
 			break;
-		case 102:
-			lettre = 'f';
+		case 5:
 			score = 4;
 			break;
-		case 103:
-			lettre = 'g';
+		case 6:
 			score = 2;
 			break;
-		case 104:
-			lettre = 'h';
+		case 7:
 			score = 4;
 			break;
-		case 105:
-			lettre = 'i';
+		case 8:
 			score = 1;
 			break;
-		case 106:
-			lettre = 'j';
+		case 9:
 			score = 8;
 			break;
-		case 107:
-			lettre = 'k';
+		case 10:
 			score = 10;
 			break;
-		case 108:
-			lettre = 'l';
+		case 11:
 			score = 1;
 			break;
-		case 109:
-			lettre = 'm';
+		case 12:
 			score = 2;
 			break;
-		case 110:
-			lettre = 'n';
+		case 13:
 			score = 1;
 			break;
-		case 111:
-			lettre = 'o';
+		case 14:
 			score = 1;
 			break;
-		case 112:
-			lettre = 'p';
+		case 15:
 			score = 3;
 			break;
-		case 113:
-			lettre = 'q';
+		case 16:
 			score = 8;
 			break;
-		case 114:
-			lettre = 'r';
+		case 17:
 			score = 1;
 			break;
-		case 115:
-			lettre = 's';
+		case 18:
 			score = 1;
 			break;
-		case 116:
-			lettre = 't';
+		case 19:
 			score = 1;
 			break;
-		case 117:
-			lettre = 'u';
+		case 20:
 			score = 1;
 			break;
-		case 118:
-			lettre = 'v';
+		case 21:
 			score = 4;
 			break;
-		case 119:
-			lettre = 'w';
+		case 22:
 			score = 10;
 			break;
-		case 120:
-			lettre = 'x';
+		case 23:
 			score = 10;
 			break;
-		case 121:
-			lettre = 'y';
+		case 24:
 			score = 10;
 			break;
-		case 122:
-			lettre = 'z';
+		case 25:
 			score = 10;
 			break;
 		default:
-			
+
 			break;
 		}
-		
+
 	}
 
-	
-	
-	
-	
-	
+	/**
+	 * Renvoie l'Indice D'une Lettre
+	 */
+	public int indice(char c){
+		return tableauLettre.get(c);
+	}
+
+
+
 	/**
 	 * Getter and Setter
 	 */
-	
+
 	public char getLettre() {
 		return lettre;
 	}
@@ -177,9 +209,14 @@ public class Lettre implements Serializable{
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
-	
-	
-	
+
+	public HashMap<Character, Integer> getTableauLettre() {
+		return tableauLettre;
+	}
+
+
+
+
+
 
 }
