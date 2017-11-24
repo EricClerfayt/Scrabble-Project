@@ -188,7 +188,73 @@ public class Jeu {
 			} 
 			return false;
 	 }
+		
+		/*
+		 * Conditions de fin de partie
+		 * 
+		 * si la pioche est vide
+		 * ou abandon d'un joueur
+		 * ou refus de jeu / impossibilité de jouer
+		 */
+		
+		public void FinDePartie()
+		{
+			/*
+			 * Pioche vide. Comparaison des scores
+			 */
+			if (pioche.getNbLettre() == 0)
+			{
+				if ((joueur.getScore() < ordi.getScore())
+				{
+					System.out.println("Victoire de joueur2 \n");
+					System.out.println("Score joueur 1 :" + joueur.getScore() + "\n");
+					System.out.println("Score joueur 2 :" + ordi.getScore() + "\n");
+				}
+				else if ((joueur.getScore() == ordi.getScore())
+				{
+					System.out.println("Match nul. Les joueurs sont ex-aequo.\n");
+					System.out.println("Score joueur 1 :" + joueur.getScore() + "\n");
+					System.out.println("Score joueur 2 :" + ordi.getScore() + "\n");
+				}
+				else
+				{
+					System.out.println("Victoire de joueur1 \n");
+					System.out.println("Score joueur 1 :" + joueur.getScore() + "\n");
+					System.out.println("Score joueur 2 :" + ordi.getScore() + "\n");	
+				}
+			}
+			
+			/*
+			 * Abandon d'un joueur
+			 */
 
+			//créer les boutons AbandonJoueur1 et AbandonJoueur2
+			
+			if (joueur.abandon == 1) 
+				System.out.println("Victoire de joueur2 par abandon de joueur1");
+			else (ordi.abandon == 1)
+				System.out.println("Victoire de joueur1 par abandon de joueur2");
+			
+			/*
+			 * si les joueurs ont passé chacun 3 fois consécutivement (sans qu'aucun mot n'ait été posé)
+			 * défalquement des points (des lettres du chevalet/de la main) non joués (chevalets personnels) des scores
+			 */
+
+			//créer compteur de passes consécutives
+
+			if ((joueur.passe.compteur == 3) && (ordi.passe.compteur == 3))
+			{
+				System.out.println("refus de jeu de la part des 2 joueurs \n");
+				joueur.getScore() -= joueur.chevalet; //chevalet = somme des points des lettres du chevalet de joueur1
+				ordi.getScore() -= ordi.chevalet; //chevalet = somme des points des lettres du chevalet d'ordi ou joueur2
+			}
+			
+			/*
+			 *  bloquer le jeu (ne plus pouvoir jouer) (à faire)
+			 *  pas les boutons ...
+			 */
+		}
+	 
 	/**
 	 * Getter and Setter
 	 */
