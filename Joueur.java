@@ -27,8 +27,9 @@ public class Joueur {
 	 */
 	public void afficherJeuJoueur() {
 		for(int i = 0 ; i < jeu.length; i++) {
-			System.out.println(jeu[i].getLettre());
+			System.out.print(jeu[i].getLettre());
 		}
+		System.out.println("");
 	}
 	
 	/**
@@ -45,6 +46,7 @@ public class Joueur {
 		}
 		return false;
 	}
+	
 	
 	
 	/**

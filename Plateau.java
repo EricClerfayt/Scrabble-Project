@@ -81,7 +81,7 @@ public class Plateau implements Serializable
 	
 	public void afficher()
 	{
-		System.out.println ("voici le plateau initialisé (toutes les cases initialisées à '0' et score = 0):");
+		System.out.println ("voici le plateau");
 		for (i=0 ; i<15 ; i++)
 		{
 			for (j=0 ; j<15 ; j++)
@@ -91,16 +91,6 @@ public class Plateau implements Serializable
 			System.out.println (" ");
 		}
 		System.out.println();
-	
-		System.out.println ("voici le plateau avec les cases speciales: ");
-		for (i=0 ; i<15 ; i++)
-		{
-			for (j=0 ; j<15 ; j++)
-			{
-				System.out.print (plateau_cases_spe[i][j] + " ");
-			}
-			System.out.println (" ");
-		}	
 	}
 
 
@@ -182,7 +172,10 @@ public class Plateau implements Serializable
 	public void setPlateau_cases_spe(int[][] plateau_cases_spe) {
 		this.plateau_cases_spe = plateau_cases_spe;
 	}
-	
+
+	public char getVide() {
+		return vide.getLettre();
+	}
 	
 	
 	

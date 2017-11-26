@@ -13,9 +13,9 @@ public class dico {
 	
 	//Méthode pour comparer le mot posé(String) à la ligne extraite du dictionnaire(String) et renvoyant un boolean si ils sont identiques
 	private static boolean Comparaison(int lineNo, String line, String mot) {
-		String m = line.toLowerCase();
+		//String m = line.toLowerCase();
 		
-		if(mot.equals(m))
+		if(mot.equals(line))
 			return true;
 		else
 			return false;

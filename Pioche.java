@@ -180,6 +180,20 @@ public class Pioche implements Serializable{
 		return p;
 	}
 
+	/**
+	 * Reprendre lettre
+	 */
+
+	public void reprendre(Lettre [] defausse)
+	{
+		int n = 0;
+		for(int i = 0;i<defausse.length;i++)
+		{
+			n = defausse[i].indice(defausse[i].getLettre());
+			pioche[n-1]++;
+			nbLettre++;
+		}
+	}
 	
 	/**
 	 * Getter and Setter
@@ -194,4 +208,15 @@ public class Pioche implements Serializable{
 	public void setPioche(int[] pioche) {
 		this.pioche = pioche;
 	}
+
+
+	public int getNbLettre() {
+		return nbLettre;
+	}
+
+
+	public void setNbLettre(int nbLettre) {
+		this.nbLettre = nbLettre;
+	}
+	
 }
