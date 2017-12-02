@@ -3,6 +3,8 @@ package scrabble.game.jeu;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import scrabble.game.window.Fenetre;
+
 public class Jeu {
 
 	private Plateau plateau = new Plateau();
@@ -17,7 +19,7 @@ public class Jeu {
 	}
 
 
-	public void toursEnCours (Joueur courant) {
+	public void toursEnCours (Joueur courant, Fenetre f) {
 
 		// variable.
 		Lettre[] mot = new Lettre[15];
@@ -40,6 +42,7 @@ public class Jeu {
 			}
 		}
 		
+		f.repaint();
 		courant.afficherJeuJoueur();
 		
 		//choix de l'action
@@ -56,25 +59,20 @@ public class Jeu {
 				//demande sa position et sa direction
 				System.out.println("A quelle position ?");
 				x = number();
-				System.out.println(x);
 				y = number();
-				System.out.println(y);
 				System.out.println("Dans quelle direction ?");
-				System.out.println(direction);
 				direction = choixDirection();
-				System.out.println(direction);
 				
 				//verification si le mot et jouable.
 				if(mot[0]!=null) {			
-					if(canPlay(mot, 5, 10, Direction.DROITE, courant.getJeu(), plateau.getPlateau())){
+					if(canPlay(mot, x, y, direction, courant.getJeu(), plateau.getPlateau())){
 						if(verifierPlacementMot(mot, x, y, direction)) {
 							if(verifierMot(mot)) {
-								if(!placerMot(mot, x, y, direction)) {
-									System.out.println("## ERREUR : il est impossible de placer le mot (placerMot)");
-								}
-								else {
-									courant.setScore(courant.getScore()+courant.calculpoint(mot, x, y, direction));
-								}
+								courant.setScore(courant.getScore()+courant.calculpoint(mot, x, y, direction));
+								courant.setJeu(retraitLettre(mot, x, y, direction, courant.getJeu(), plateau.getPlateau()));
+								placerMot(mot, x, y, direction);
+								valide = true;
+								if(first) {first = false;}
 							}
 							else {
 								System.out.println("## ERREUR : il est impossible de placer le mot(verifierMot)");
@@ -177,32 +175,43 @@ public class Jeu {
 	 * @return
 	 */
 	public boolean canPlay(Lettre[] mot,int x,int y,Direction direction,Lettre[] jeu,Lettre plateau[][]) {
-
-		
-		
-		if(!testeFirst(mot, x, y, direction)) {return false;}
-		
 		int i = 0,j = 0;
 		Lettre[] lettreRestante = new Lettre[mot.length];
 		Lettre[] copieJeu = new Lettre[jeu.length];
+		boolean testMotPlacement = true;
+		
+		if(first) {			
+			if(!testeFirst(mot, x, y, direction)) 
+			{
+				return false;	
+			}
+			else {
+				testMotPlacement = true;
+			}			
+		}
+		
 		for(i = 0; i < copieJeu.length;i++) {
 			copieJeu[i]=new Lettre(jeu[i].getLettre());
 		}
-
 		
+		i=0;
 		switch (direction)
 		{
-
-
 		case BAS:
 			while(mot[i] != null || i == mot.length-1) {
-				if(plateau[x][y].getLettre() == '0') {	
+				if(plateau[x-1][y-1].getLettre() == '0') {	
 					lettreRestante[j] = new Lettre(mot[i].getLettre());
 					j++;
 				}
-				else if(plateau[x][y].getLettre() != mot[i].getLettre()) {
-					return false;
+				else {
+					if(plateau[x-1][y-1].getLettre() != mot[i].getLettre()) {
+						return false;
+					}
+					else {
+						testMotPlacement = true;
+					}
 				}
+				
 				x++;
 				i++;
 			}
@@ -217,8 +226,10 @@ public class Jeu {
 					if(plateau[x-1][y-1].getLettre() != mot[i].getLettre()) {
 						return false;
 					}
+					else {
+						testMotPlacement = true;
+					}
 				}
-
 				y++;
 				i++;
 			}
@@ -226,7 +237,6 @@ public class Jeu {
 		} 
 
 		i=0;
-		
 		while(lettreRestante[i] != null || i == lettreRestante.length-1) {
 			for(j = 0; j < copieJeu.length;j++) {				
 				if(lettreRestante[i].getLettre()==copieJeu[j].getLettre()) {
@@ -236,17 +246,107 @@ public class Jeu {
 			}
 			i++;
 		}
-
 		i=0;
+		while(lettreRestante[i] != null || i == lettreRestante.length-1) {
+			if(lettreRestante[i].getLettre()!='0') {
+				for(j = 0; j < copieJeu.length;j++) {	
+					if(copieJeu[j].getLettre() == ' ') {
+						copieJeu[j].setLettre('0');
+						lettreRestante[i].setLettre('0');
+						System.out.println("."+copieJeu[j].getLettre()+" ."+lettreRestante[i].getLettre());
+					}
+				}				
+			}
+
+			System.out.println("é");
+			i++;
+
+		}
 		
+		i=0;
 		while(lettreRestante[i] != null || i == lettreRestante.length-1) {
 			if(lettreRestante[i].getLettre()!='0') {return false;}
 			i++;
 		}
 
-		return true;
+		return testMotPlacement;
 	}
 
+	
+	
+	
+	/**
+	 * 
+	 * @param mot
+	 * @param x
+	 * @param y
+	 * @param direction
+	 * @param jeu
+	 * @param plateau
+	 */
+	public Lettre[] retraitLettre(Lettre[] mot,int x,int y,Direction direction,Lettre[] jeu,Lettre plateau[][]) {
+		
+		int i = 0,j = 0;
+		Lettre[] lettreRestante = new Lettre[mot.length];
+		Lettre[] copieJeu = new Lettre[jeu.length];
+		
+		
+		for(i = 0; i < copieJeu.length;i++) {
+			copieJeu[i]=new Lettre(jeu[i].getLettre());
+		}
+		
+		i = 0;
+		switch (direction)
+		{
+
+
+		case BAS:
+			while(mot[i] != null || i == mot.length-1) {
+				if(plateau[x-1][y-1].getLettre() == '0') {	
+					lettreRestante[j] = new Lettre(mot[i].getLettre());
+					j++;
+				}
+				x++;
+				i++;
+			}
+			break;
+		case DROITE:
+			while(mot[i] != null || i == mot.length-1){
+				if(plateau[x-1][y-1].getLettre() == '0') {
+					lettreRestante[j] = new Lettre(mot[i].getLettre());
+					j++;
+				}
+				y++;
+				i++;
+			}
+			break;
+		} 
+		
+		
+		i=0;
+		while(lettreRestante[i] != null || i == lettreRestante.length-1) {
+			for(j = 0; j < copieJeu.length;j++) {				
+				if(lettreRestante[i].getLettre()==copieJeu[j].getLettre()) {
+					copieJeu[j].setLettre('0');
+					lettreRestante[i].setLettre('0');
+				}
+			}
+			i++;
+		}
+		i=0;
+		while(lettreRestante[i] != null || i == lettreRestante.length-1) {
+			for(j = 0; j < copieJeu.length;j++) {				
+				if(copieJeu[j].getLettre()==' ') {
+					copieJeu[j].setLettre('0');
+					lettreRestante[i].setLettre('0');
+				}
+			}
+			i++;
+		}
+		return copieJeu;
+	}
+	
+	
 
 	// renvoit un chiffre pour le placement dans le plateau
 	public int number() {
@@ -298,7 +398,7 @@ public class Jeu {
 	 * place le mot du joueur dans le tableau
 	 */
 
-	public boolean placerMot(Lettre[] mot,int x,int y,Direction direction) {
+	public void placerMot(Lettre[] mot,int x,int y,Direction direction) {
 
 		int i=0;
 
@@ -321,7 +421,6 @@ public class Jeu {
 			break;
 
 		} 
-		return false;
 	}
 
 
