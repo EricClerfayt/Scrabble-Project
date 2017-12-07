@@ -1,5 +1,6 @@
 package scrabble.game.jeu;
 
+
 import scrabble.game.window.*;
 
 public class Partie {
@@ -41,10 +42,10 @@ public class Partie {
 		
 		while(!victoire) {
 			f.repaint();
-			Jeu.toursEnCours(Jeu.getJoueur(),f);
+			Jeu.toursEnCours(Jeu.getJoueur(),f,true);
 			f.repaint();
 			//Jeu.FinDePartie(); /* non fini + return void */		
-			Jeu.toursEnCours(Jeu.getOrdi(),f);
+			Jeu.toursEnCours(Jeu.getOrdi(),f,false);
 			f.repaint();
 			//Jeu.FinDePartie(); /* non fini + return void */
 		}

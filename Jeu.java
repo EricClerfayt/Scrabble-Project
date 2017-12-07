@@ -13,13 +13,16 @@ public class Jeu {
 	private Joueur ordi = new Joueur();
 	private dico dictio = new dico();
 	private boolean first = true;
-
+	private boolean bool;
 
 	public Jeu() {
 	}
 
 
-	public void toursEnCours (Joueur courant, Fenetre f) {
+	public void toursEnCours (Joueur courant, Fenetre f, boolean joueur) {
+
+		bool = joueur;
+		f.repaint();
 
 		// variable.
 		Lettre[] mot = new Lettre[15];
@@ -42,9 +45,8 @@ public class Jeu {
 			}
 		}
 		
-		f.repaint();
 		courant.afficherJeuJoueur();
-		
+		f.repaint();
 		//choix de l'action
 		System.out.println("Voulez-vous: \n 1- Jouer un mot \n 2-Passer votre Tour \n 3-Changer N Lettres \n");
 		switch(sc.nextInt()){
@@ -142,20 +144,20 @@ public class Jeu {
 		int taille=0;
 		switch (direction)
 		{
-		case BAS:
-			if(x != 7) {return false;}
+		case DROITE:
+			if(x != 8) {return false;}
 			while(mot[taille] != null || taille == mot.length-1) {
 				taille++;
 			}
-			if(y+taille<7 || y > 7){return false;}
+			if(y+taille<8 || y > 8){return false;}
 			
 			break;
-		case DROITE:
-			if(y != 7) return false;
+		case BAS:
+			if(y != 8) return false;
 			while(mot[taille] != null || taille == mot.length-1) {
 				taille++;
 			}
-			if(x+taille<7 || x > 7){return false;}
+			if(x+taille<8 || x > 8){return false;}
 			break;
 		}		
 		return true;
@@ -178,7 +180,7 @@ public class Jeu {
 		int i = 0,j = 0;
 		Lettre[] lettreRestante = new Lettre[mot.length];
 		Lettre[] copieJeu = new Lettre[jeu.length];
-		boolean testMotPlacement = true;
+		boolean testMotPlacement = false;
 		
 		if(first) {			
 			if(!testeFirst(mot, x, y, direction)) 
@@ -208,7 +210,8 @@ public class Jeu {
 						return false;
 					}
 					else {
-						testMotPlacement = true;
+						testMotPlacement = true;							
+						
 					}
 				}
 				
@@ -506,7 +509,7 @@ public class Jeu {
 			chaine = chaine + Character.toString(mot[i].getLettre());
 			i++;
 		}
-		return dictio.recherche(chaine);
+		return dico.recherche(chaine);
 	}
 
 
@@ -674,5 +677,9 @@ public class Jeu {
 
 	public void setDictio(dico dictio) {
 		this.dictio = dictio;
+	}
+	
+	public boolean getbool() {
+		return bool;
 	}
 }

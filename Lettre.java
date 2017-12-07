@@ -181,6 +181,7 @@ public class Lettre implements Serializable{
 		
 	}
 
+	
 	/**
 	 * Renvoie l'Indice D'une Lettre
 	 */
@@ -214,10 +215,5 @@ public class Lettre implements Serializable{
 	public HashMap<Character, Integer> getTableauLettre() {
 		return tableauLettre;
 	}
-	
-	
-	
-	
-	
 
 }
