@@ -184,6 +184,8 @@ public class Plateau implements Serializable
 	}
 	
 	
-	
+	public char getVide() {
+		return vide.getLettre();
+	}
 	
 }

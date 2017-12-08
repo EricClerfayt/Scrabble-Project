@@ -1,5 +1,6 @@
 package scrabble.game.window;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -29,29 +30,104 @@ public class Panneau extends JPanel {
 		
 		Lettre plateau[][] = jeu.getPlateau().getPlateau();
 		int plateau_cases_spe[][] = jeu.getPlateau().getPlateau_cases_spe();
-		Lettre[] handjoueur = jeu.getJoueur().getJeu();
+		Lettre[] handjoueur;
 		
-		affichePlateau(plateau, x1, y1, g);
-		afficheCase(plateau_cases_spe, x1, y1, g);
+		if(jeu.getbool()) {			
+			handjoueur = jeu.getJoueur().getJeu();
+		}
+		else {
+			handjoueur = jeu.getOrdi().getJeu();
+		}
+		
+		affichePlateau(plateau,plateau_cases_spe, x1, y1, g);
 		afficheJeuJoueur(handjoueur, x1, y1, g);
-		
-		
 	}
 	
-	public void affichePlateau(Lettre plateau[][],int x1,int y1,Graphics g) {
+	public void affichePlateau(Lettre plateau[][],int plateau_cases_spe[][],int x1,int y1,Graphics g) {
 		
-		int x=x1-100;
-		int y=y1;
+		int setDecalX = 50;
+		int setDecalY = 20;
+	
+		g.setColor(Color.GREEN);
+		g.fillRect(x1-setDecalX, y1+5, 300, 300);
+		
+		
+		int x=x1-setDecalX;
+		int y=y1+setDecalY;
 		
 		for (int i=0 ; i<15 ; i++)
-		{
+		{	
 			for (int j=0 ; j<15 ; j++)
 			{
-				g.drawString(""+plateau[i][j].getLettre(), x, y);
+				if(plateau[i][j].getLettre()=='0') {
+					if(plateau_cases_spe[i][j]!=0) {
+						switch (plateau_cases_spe[i][j]) {
+						case 1:
+							g.setColor(Color.CYAN);
+							g.fillRect(x, y-15, 20, 20);
+							g.setColor(Color.black);
+							break;
+						case 2:	
+							g.setColor(Color.blue);
+							g.fillRect(x, y-15, 20, 20);
+							g.setColor(Color.black);
+							break;
+						case 3:	
+							g.setColor(Color.PINK);
+							g.fillRect(x, y-15, 20, 20);
+							g.setColor(Color.black);
+							break;
+						case 4:
+							g.setColor(Color.RED);
+							g.fillRect(x, y-15, 20, 20);
+							g.setColor(Color.black);
+							break;
+						default:
+							break;
+						}
+					}
+					g.drawString(" ", x, y);
+				}
+				else {
+					g.setColor(Color.orange);
+					g.fillRect(x, y-15, 20, 20);
+					g.setColor(Color.black);
+					g.drawString(" "+plateau[i][j].getLettre()+" ", x+2, y);
+				}
 				x+=20;
 			}
-			x=x1-100;
+			x=x1-setDecalX;
 			y+=20;
+		}
+		
+		x=x1-setDecalX;
+		y=y1+setDecalY;
+		
+		for (int i=0 ; i<15 ; i++)
+		{	
+			for (int j=0 ; j<15 ; j++)
+			{
+				g.drawLine(x, y1+5,x , y+5);
+				x+=20;
+			}
+			g.drawLine(x1-setDecalX, y+5,x , y+5);
+			x=x1-setDecalX;
+			y+=20;
+		}	
+		
+		g.setColor(Color.black);
+		g.drawRect(x1-setDecalX, y1+5, 300, 300);
+		
+		x=x1-setDecalX;
+		y=y1+setDecalY;
+		
+		for(int i=0;i<15;i++) {
+			g.drawString("" + (i+1),x1-setDecalX-20,y);
+			y+=20;
+		}
+		for(int i=0;i<15;i++) {
+			g.drawString("" + (i+1),x,y1-5);
+			x+=20;
 		}
 		
 	}
@@ -77,15 +153,40 @@ public class Panneau extends JPanel {
 	
 	public void afficheJeuJoueur(Lettre[] handjoueur,int x1,int y1,Graphics g) {
 		
-		int x=x1-100;
-		int y=y1+350;
+		int setDecalX = 45;
+		int setDecalY = 330;
+
+		int x=x1-setDecalX;
+		int y=y1+setDecalY;
+		
+		
+		g.setColor(Color.orange);
+		g.fillRect(x-5, y-15, 140, 20);
+		
+		g.setColor(Color.black);
+		g.drawRect(x-5, y-15, 140, 20);
 		
 		for(int i = 0 ; i < jeu.getJoueur().tailleJeu(); i++) {
-			g.drawString(""+handjoueur[i].getLettre(),x,y);
+			if(handjoueur[i].getLettre() != '0') {
+				if(handjoueur[i].getLettre() != ' ') {
+					g.drawString(""+handjoueur[i].getLettre(),x,y);
+				}
+				else {
+					g.drawString("_",x,y);
+				}
+			}
+			else {
+				g.drawString("!",x,y);
+			}
 			x+=20;
 		}
 		
+		x=x1-setDecalX;
 		
+		for(int i = 0 ; i < jeu.getJoueur().tailleJeu()-1; i++) {
+			g.drawLine(x+15, y-15, x+15, y+5);
+			x+=20;
+		}
 	}
 	
 	

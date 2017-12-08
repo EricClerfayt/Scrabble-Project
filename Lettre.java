@@ -182,6 +182,12 @@ public class Lettre implements Serializable{
 	}
 
 	
+	/**
+	 * Renvoie l'Indice D'une Lettre
+	 */
+	public int indice(char c){
+		return tableauLettre.get(c);
+	}
 	
 	
 	
@@ -209,10 +215,5 @@ public class Lettre implements Serializable{
 	public HashMap<Character, Integer> getTableauLettre() {
 		return tableauLettre;
 	}
-	
-	
-	
-	
-	
 
 }
