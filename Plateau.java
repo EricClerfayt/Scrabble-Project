@@ -11,8 +11,8 @@ import java.io.Serializable;
 
 /**
  * initialisation du plateau de scrabble
- * * plateau : plateau (initialisé) de lettres
- * plateau_cases_spe : plateau des cases spéciales
+ * * plateau : plateau (initialisÃ©) de lettres
+ * plateau_cases_spe : plateau des cases spÃ©ciales
  * 
  * sauvegarde (serialisation) et lecture (deserialisation) du plateau
  */
@@ -81,7 +81,7 @@ public class Plateau implements Serializable
 	
 	public void afficher()
 	{
-		System.out.println ("voici le plateau initialisé (toutes les cases initialisées à '0' et score = 0):");
+		System.out.println ("voici le plateau initialisÃ© (toutes les cases initialisÃ©es Å• '0' et score = 0):");
 		for (i=0 ; i<15 ; i++)
 		{
 			for (j=0 ; j<15 ; j++)
