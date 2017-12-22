@@ -10,7 +10,8 @@ public class Partie {
 		//creation du jeu;
 		Jeu Jeu = new Jeu();
 		Panneau P = new Panneau(Jeu);
-		Fenetre f = new Fenetre(P);
+		Menu menu = new Menu();
+		Fenetre f = new Fenetre(P,menu);
 
 		//creation de la variable de victoire
 		boolean victoire = false;
